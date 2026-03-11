@@ -18,8 +18,14 @@ import CTASection from '../components/CTASection.astro';
       Section 1: Hero
       ========================================== */}
   <Hero
-    image="/images/photos/favorites/2010mh-living-fireplace.jpg"
-    headline="Your home. Your plan. Built right."
+    images={[
+      "/images/photos/hero/patio-path.jpg",
+      "/images/photos/favorites/2010mh-living-fireplace.jpg",
+      "/images/photos/hero/kitchen-sink.jpg",
+      "/images/photos/hero/backyard-south.jpg",
+      "/images/photos/hero/exterior-front.jpg",
+    ]}
+    headline="Your home. Your plan.<br>Built right."
     subheadline="Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio."
     ctaText="Let's Talk About Your Home"
     ctaLink="/contact"
@@ -240,7 +246,16 @@ import CTASection from '../components/CTASection.astro';
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 2.5rem 2rem;
+  }
+
+  .projects-grid > :global(.before-after) {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
   }
 
   @media (max-width: 768px) {
