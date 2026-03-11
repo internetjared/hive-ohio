@@ -28,10 +28,13 @@ const {
     </div>
   )}
 
-  <div class="ba-viewer" data-ba-viewer style="--position: 0%">
+  <div class="ba-viewer" data-ba-viewer style="--position: 50%">
+    {/* Before image — base layer, always fully visible */}
     <div class="ba-base">
       <img src={beforeImage} alt={`${projectName || 'Project'} — before`} loading="lazy" draggable="false" />
     </div>
+
+    {/* After image — overlay, clipped from the left to show only the right portion */}
     <div class="ba-overlay">
       <img src={afterImage} alt={`${projectName || 'Project'} — after`} loading="lazy" draggable="false" />
     </div>
@@ -39,16 +42,14 @@ const {
     <span class="ba-label ba-label--before">{beforeLabel}</span>
     <span class="ba-label ba-label--after">{afterLabel}</span>
 
-    <div class="ba-edge-glow ba-edge-glow--before"></div>
-    <div class="ba-edge-glow ba-edge-glow--after"></div>
-
+    {/* Draggable divider handle */}
     <div
       class="ba-handle"
       role="slider"
       aria-label="Before and after comparison slider"
       aria-valuemin="0"
       aria-valuemax="100"
-      aria-valuenow="0"
+      aria-valuenow="50"
       tabindex="0"
     >
       <div class="ba-handle-line"></div>
@@ -75,7 +76,9 @@ const {
   .before-after {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
+    max-width: 900px;
+    margin-inline: auto;
   }
 
   .before-after-header {
@@ -83,7 +86,7 @@ const {
   }
 
   .before-after-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-bottom: 0.35rem;
     color: inherit;
   }
@@ -98,11 +101,12 @@ const {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 10;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: col-resize;
     user-select: none;
     -webkit-user-select: none;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
   }
 
   /* === Before image (base layer, always fully visible) === */
@@ -118,11 +122,11 @@ const {
     object-fit: cover;
   }
 
-  /* === After image (clipped overlay, revealed by sliding) === */
+  /* === After image (clipped overlay — visible to the RIGHT of the handle) === */
   .ba-overlay {
     position: absolute;
     inset: 0;
-    clip-path: inset(0 calc(100% - var(--position)) 0 0);
+    clip-path: inset(0 0 0 var(--position));
     z-index: 1;
   }
 
@@ -148,7 +152,7 @@ const {
     backdrop-filter: blur(6px);
     z-index: 3;
     pointer-events: none;
-    transition: opacity 0.2s ease, background-color 0.4s ease;
+    transition: opacity 0.3s ease, background-color 0.4s ease;
   }
 
   .ba-label--before {
@@ -157,25 +161,6 @@ const {
 
   .ba-label--after {
     right: 1rem;
-  }
-
-  /* === Edge glow overlays === */
-  .ba-edge-glow {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-  }
-
-  .ba-edge-glow--before {
-    background: linear-gradient(to right, rgba(121, 137, 88, 0.25) 0%, transparent 40%);
-  }
-
-  .ba-edge-glow--after {
-    background: linear-gradient(to left, rgba(121, 137, 88, 0.25) 0%, transparent 40%);
-    z-index: 2;
   }
 
   /* === Handle (draggable divider) === */
@@ -215,12 +200,13 @@ const {
     background-color: rgba(248, 243, 224, 0.95);
     color: var(--color-earth);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-    transition: box-shadow 0.15s ease, transform 0.25s ease;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
   }
 
   .ba-handle:hover .ba-handle-thumb,
   .ba-handle:focus-visible .ba-handle-thumb {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    transform: scale(1.08);
   }
 
   .ba-handle:focus-visible .ba-handle-line {
@@ -232,14 +218,14 @@ const {
     outline-offset: 2px;
   }
 
-  /* Pulse hint after auto-reveal completes */
+  /* Pulse hint after auto-reveal */
   .ba-handle--pulse .ba-handle-thumb {
     animation: ba-pulse 0.6s ease-in-out 2;
   }
 
   @keyframes ba-pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.25); }
+    50% { transform: scale(1.2); }
   }
 
   /* === Link === */
@@ -248,14 +234,13 @@ const {
     align-items: center;
     gap: 0.4rem;
     align-self: center;
-    justify-self: center;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-page);
-    opacity: 0.8;
-    transition: opacity var(--transition-fast), gap var(--transition-fast);
+    opacity: 0.7;
+    transition: opacity 0.2s ease, gap 0.2s ease;
   }
 
   .before-after-link:hover {
@@ -268,6 +253,10 @@ const {
     .ba-viewer {
       aspect-ratio: 4 / 3;
       border-radius: 8px;
+    }
+
+    .before-after-title {
+      font-size: 1.3rem;
     }
 
     .ba-handle-thumb {
@@ -288,58 +277,32 @@ const {
 
     .ba-label--before { left: 0.6rem; }
     .ba-label--after { right: 0.6rem; }
-
   }
 </style>
 
 <script>
   document.querySelectorAll<HTMLElement>('[data-ba-viewer]').forEach((viewer) => {
     const handle = viewer.querySelector<HTMLElement>('.ba-handle');
-    const thumb = viewer.querySelector<HTMLElement>('.ba-handle-thumb');
-    const glowBefore = viewer.querySelector<HTMLElement>('.ba-edge-glow--before');
-    const glowAfter = viewer.querySelector<HTMLElement>('.ba-edge-glow--after');
     const labelBefore = viewer.querySelector<HTMLElement>('.ba-label--before');
     const labelAfter = viewer.querySelector<HTMLElement>('.ba-label--after');
-    if (!handle || !thumb) return;
+    if (!handle) return;
     if (viewer.dataset.baInit === 'true') return;
     viewer.dataset.baInit = 'true';
 
     let isDragging = false;
-    let isAnimating = false;
+    let hasInteracted = false;
     let animationId: number | null = null;
-    let currentScale = 1;
 
     const olive = 'rgba(121, 137, 88, 0.95)';
     const neutral = 'rgba(60, 56, 47, 0.8)';
 
-    function lerpScale(target: number) {
-      // Smooth interpolation toward target scale
-      currentScale += (target - currentScale) * 0.15;
-      if (Math.abs(currentScale - target) < 0.005) currentScale = target;
-      thumb.style.transform = `scale(${currentScale})`;
-    }
-
-    function updateEdgeEffects(pct: number) {
-      // Handle grows when near edges (0% or 100%)
-      const distFromEdge = Math.min(pct, 100 - pct);
-      const edgeZone = 15;
-      const edgeFactor = Math.max(0, 1 - distFromEdge / edgeZone);
-      const targetScale = 1 + edgeFactor * 0.35;
-      lerpScale(targetScale);
-
-      // Glow: before glow when near 0%, after glow when near 100%
-      if (glowBefore) glowBefore.style.opacity = String(pct < edgeZone ? edgeFactor : 0);
-      if (glowAfter) glowAfter.style.opacity = String((100 - pct) < edgeZone ? edgeFactor : 0);
-
-      // Labels: highlight the dominant side in olive green
-      if (labelBefore) labelBefore.style.backgroundColor = pct < 40 ? olive : neutral;
-      if (labelAfter) labelAfter.style.backgroundColor = pct > 60 ? olive : neutral;
-    }
-
     function setPos(pct: number) {
       viewer.style.setProperty('--position', `${pct}%`);
       handle.setAttribute('aria-valuenow', String(Math.round(pct)));
-      updateEdgeEffects(pct);
+
+      // Highlight labels based on which side dominates
+      if (labelBefore) labelBefore.style.backgroundColor = pct > 60 ? olive : neutral;
+      if (labelAfter) labelAfter.style.backgroundColor = pct < 40 ? olive : neutral;
     }
 
     function setPosition(clientX: number) {
@@ -349,27 +312,27 @@ const {
       setPos(pct);
     }
 
-    // Ease-out cubic for a natural slow-down
+    // Ease-out cubic for natural deceleration
     function easeOutCubic(t: number): number {
       return 1 - Math.pow(1 - t, 3);
     }
 
-    // Auto-reveal animation: 0% → 100% with ease-out (slows at end)
+    // Auto-reveal: sweep handle from right (100%) to center (50%)
     function autoReveal() {
-      isAnimating = true;
-      const duration = 2200; // ms
+      const duration = 1800;
       const start = performance.now();
+      const startPos = 100;
+      const endPos = 50;
 
       function tick(now: number) {
         const elapsed = now - start;
         const t = Math.min(elapsed / duration, 1);
         const eased = easeOutCubic(t);
-        setPos(eased * 100);
+        setPos(startPos + (endPos - startPos) * eased);
 
         if (t < 1) {
           animationId = requestAnimationFrame(tick);
         } else {
-          isAnimating = false;
           animationId = null;
           // Pulse the handle to hint it's draggable
           handle.classList.add('ba-handle--pulse');
@@ -377,35 +340,40 @@ const {
         }
       }
 
+      // Start fully on "before" side
+      setPos(startPos);
       animationId = requestAnimationFrame(tick);
     }
 
-    // Cancel animation if user interacts
     function stopAnimation() {
       if (animationId !== null) {
         cancelAnimationFrame(animationId);
         animationId = null;
       }
-      isAnimating = false;
     }
 
-    // Intersection Observer — trigger reveal when visible
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            autoReveal();
-            observer.disconnect();
+    // Trigger auto-reveal when scrolled into view
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReduced) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting && !hasInteracted) {
+              autoReveal();
+              observer.disconnect();
+            }
           }
-        }
-      },
-      { threshold: 0.7 }
-    );
-    observer.observe(viewer);
+        },
+        { threshold: 0.4 }
+      );
+      observer.observe(viewer);
+    }
 
     // Mouse events
     viewer.addEventListener('mousedown', (e: MouseEvent) => {
       stopAnimation();
+      hasInteracted = true;
       isDragging = true;
       setPosition(e.clientX);
       e.preventDefault();
@@ -423,6 +391,7 @@ const {
     // Touch events
     viewer.addEventListener('touchstart', (e: TouchEvent) => {
       stopAnimation();
+      hasInteracted = true;
       isDragging = true;
       setPosition(e.touches[0].clientX);
     }, { passive: true });
@@ -437,10 +406,11 @@ const {
       isDragging = false;
     });
 
-    // Keyboard
+    // Keyboard arrow keys
     handle.addEventListener('keydown', (e: KeyboardEvent) => {
       stopAnimation();
-      const current = parseFloat(viewer.style.getPropertyValue('--position')) || 0;
+      hasInteracted = true;
+      const current = parseFloat(viewer.style.getPropertyValue('--position')) || 50;
       let next = current;
       if (e.key === 'ArrowLeft') next = Math.max(0, current - 5);
       else if (e.key === 'ArrowRight') next = Math.min(100, current + 5);

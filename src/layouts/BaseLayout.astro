@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -25,5 +26,6 @@ const { title, description, image, currentPage } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <ScrollReveal />
   </body>
 </html>

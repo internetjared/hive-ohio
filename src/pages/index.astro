@@ -6,6 +6,8 @@ import ServiceCard from '../components/ServiceCard.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
 import CTASection from '../components/CTASection.astro';
+import ContactForm from '../components/ContactForm.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
 ---
 
 <BaseLayout
@@ -28,59 +30,65 @@ import CTASection from '../components/CTASection.astro';
     headline="Your home. Your plan.<br>Built right."
     subheadline="Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio."
     ctaText="Let's Talk About Your Home"
-    ctaLink="/contact"
+    ctaLink="#contact"
     secondaryCtaText="See Our Work"
-    secondaryCtaLink="/projects"
+    secondaryCtaLink="#featured-projects"
   />
 
   {/* ==========================================
       Section 2: Three Service Pillars
       ========================================== */}
   <Section id="services">
-    <div class="services-intro">
+    <div class="services-intro" data-reveal="up">
       <h2>How We Help</h2>
       <p>Three ways HIVE brings engineering judgment, construction knowledge, and real estate guidance together for you.</p>
     </div>
     <div class="services-grid">
-      <ServiceCard
-        title="Real Estate"
-        description="Not just buying and selling — understanding what you're getting, what it will cost, and how it fits your plan. Engineering judgment meets real estate guidance."
-        href="/services/real-estate"
-      >
-        {/* Tabler: home-search (MIT) */}
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h4.7" />
-          <path d="M9 21v-6a2 2 0 0 1 2 -2h2" />
-          <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-          <path d="M20.2 20.2l1.8 1.8" />
-        </svg>
-      </ServiceCard>
+      <div data-reveal="up" data-reveal-delay="1">
+        <ServiceCard
+          title="Real Estate"
+          description="Not just buying and selling — understanding what you're getting, what it will cost, and how it fits your plan. Engineering judgment meets real estate guidance."
+          href="/services/real-estate"
+        >
+          {/* Tabler: home-search (MIT) */}
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h4.7" />
+            <path d="M9 21v-6a2 2 0 0 1 2 -2h2" />
+            <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+            <path d="M20.2 20.2l1.8 1.8" />
+          </svg>
+        </ServiceCard>
+      </div>
 
-      <ServiceCard
-        title="Renovations"
-        description="Hands-on construction from kitchens to whole-house transformations. PE-backed planning meets craftsmanship. Structural, not just cosmetic."
-        href="/services/renovations"
-      >
-        {/* Lucide: hammer (ISC) */}
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9" />
-          <path d="m18 15 4-4" />
-          <path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" />
-        </svg>
-      </ServiceCard>
+      <div data-reveal="up" data-reveal-delay="2">
+        <ServiceCard
+          title="Renovations"
+          description="Hands-on construction from kitchens to whole-house transformations. PE-backed planning meets craftsmanship. Structural, not just cosmetic."
+          href="/services/renovations"
+        >
+          {/* Lucide: hammer (ISC) */}
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9" />
+            <path d="m18 15 4-4" />
+            <path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" />
+          </svg>
+        </ServiceCard>
+      </div>
 
-      <ServiceCard
-        title="DIY Coaching"
-        description="Guidance for homeowners who want to be involved. One-on-one consults, video walkthroughs, workshop setup. Do it right, whether you hire us or do it yourself."
-        href="/services/diy-coaching"
-      >
-        {/* Lucide: lightbulb (ISC) */}
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-          <path d="M9 18h6" />
-          <path d="M10 22h4" />
-        </svg>
-      </ServiceCard>
+      <div data-reveal="up" data-reveal-delay="3">
+        <ServiceCard
+          title="DIY Coaching"
+          description="Guidance for homeowners who want to be involved. One-on-one consults, video walkthroughs, workshop setup. Do it right, whether you hire us or do it yourself."
+          href="/services/diy-coaching"
+        >
+          {/* Lucide: lightbulb (ISC) */}
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+            <path d="M9 18h6" />
+            <path d="M10 22h4" />
+          </svg>
+        </ServiceCard>
+      </div>
     </div>
   </Section>
 
@@ -88,41 +96,49 @@ import CTASection from '../components/CTASection.astro';
       Section 3: Featured Projects (Before/After)
       ========================================== */}
   <Section id="featured-projects" background="earth" padding="default">
-    <div class="projects-intro">
+    <div class="projects-intro" data-reveal="up">
       <h2>See the Transformation</h2>
       <p>Real projects. Real results. Every renovation starts with a plan and ends with a home you love.</p>
     </div>
-    <div class="projects-grid">
-      <BeforeAfter
-        projectName="Kitchen Renovation"
-        description="Complete kitchen transformation with structural upgrades"
-        beforeImage="/images/photos/214-np/kitchen-before.jpg"
-        afterImage="/images/photos/214-np/kitchen-after.jpg"
-        href="/projects"
-      />
-      <BeforeAfter
-        projectName="Bathroom Remodel"
-        description="Updated vanity and finishes for a clean, modern look"
-        beforeImage="/images/photos/214-np/bathroom-before.jpg"
-        afterImage="/images/photos/214-np/bathroom-after.jpg"
-        href="/projects"
-      />
-      <BeforeAfter
-        projectName="Exterior Refresh"
-        description="Full curb appeal overhaul from foundation to roof"
-        beforeImage="/images/photos/2010-mh/exterior-before.jpg"
-        afterImage="/images/photos/2010-mh/exterior-after.jpg"
-        href="/projects"
-      />
-      <BeforeAfter
-        projectName="Patio & Stone Path"
-        description="Custom stone patio and walkway from bare yard to outdoor living space"
-        beforeImage="/images/photos/patio-before.png"
-        afterImage="/images/photos/patio-after.jpg"
-        href="/projects"
-      />
+    <div class="projects-stack">
+      <div data-reveal="up">
+        <BeforeAfter
+          projectName="Kitchen Renovation"
+          description="Complete kitchen transformation with structural upgrades"
+          beforeImage="/images/photos/214-np/kitchen-before.jpg"
+          afterImage="/images/photos/214-np/kitchen-after.jpg"
+          href="/projects"
+        />
+      </div>
+      <div data-reveal="up">
+        <BeforeAfter
+          projectName="Bathroom Remodel"
+          description="Updated vanity and finishes for a clean, modern look"
+          beforeImage="/images/photos/214-np/bathroom-before.jpg"
+          afterImage="/images/photos/214-np/bathroom-after.jpg"
+          href="/projects"
+        />
+      </div>
+      <div data-reveal="up">
+        <BeforeAfter
+          projectName="Exterior Refresh"
+          description="Full curb appeal overhaul from foundation to roof"
+          beforeImage="/images/photos/2010-mh/exterior-before.jpg"
+          afterImage="/images/photos/2010-mh/exterior-after.jpg"
+          href="/projects"
+        />
+      </div>
+      <div data-reveal="up">
+        <BeforeAfter
+          projectName="Patio & Stone Path"
+          description="Custom stone patio and walkway from bare yard to outdoor living space"
+          beforeImage="/images/photos/patio-before.png"
+          afterImage="/images/photos/patio-after.jpg"
+          href="/projects"
+        />
+      </div>
     </div>
-    <div class="projects-cta">
+    <div class="projects-cta" data-reveal="up">
       <a href="/projects" class="btn btn-secondary">View All Projects</a>
     </div>
   </Section>
@@ -132,10 +148,10 @@ import CTASection from '../components/CTASection.astro';
       ========================================== */}
   <Section id="about-teaser">
     <div class="about-grid">
-      <div class="about-image">
+      <div class="about-image" data-reveal="left">
         <img src="/images/logo/hive-logo-green.png" alt="HIVE logo" width="280" height="280" class="about-logo-placeholder" />
       </div>
-      <div class="about-content">
+      <div class="about-content" data-reveal="right">
         <h2>Built Different</h2>
         <p class="about-lead">
           John is a licensed Professional Engineer and Realtor in Ohio. He combines 20 years of engineering experience with hands-on construction knowledge to help clients make smarter decisions about their homes.
@@ -163,39 +179,68 @@ import CTASection from '../components/CTASection.astro';
   </Section>
 
   {/* ==========================================
-      Section 5: Testimonials
+      Section 5: Lead Magnet — Homeowner Planner
+      ========================================== */}
+  <div data-reveal="up">
+    <LeadMagnet
+      airtableEndpoint=""
+      downloadUrl="/downloads/homeowner-planner.pdf"
+    />
+  </div>
+
+  {/* ==========================================
+      Section 6: Testimonials
       ========================================== */}
   <Section id="testimonials" background="ancient-page">
-    <div class="testimonials-intro">
+    <div class="testimonials-intro" data-reveal="up">
       <h2>What Clients Say</h2>
     </div>
     <div class="testimonials-grid">
-      <TestimonialCard
-        quote="John didn't just help us find a house — he helped us understand what we were actually buying. The inspection walkthrough alone saved us thousands in unexpected repairs."
-        name="Sarah M."
-        context="Home buyer"
-      />
-      <TestimonialCard
-        quote="We came in with a vision and a tight budget. John helped us figure out what was worth doing, what could wait, and what would actually add value. The kitchen turned out better than we imagined."
-        name="David & Rachel T."
-        context="Renovation clients"
-      />
-      <TestimonialCard
-        quote="I wanted to do the work myself but didn't know where to start. A two-hour session with John replaced weeks of YouTube research. He showed me the right approach and the right tools."
-        name="Marcus L."
-        context="DIY coaching client"
+      <div data-reveal="up" data-reveal-delay="1">
+        <TestimonialCard
+          quote="John didn't just help us find a house — he helped us understand what we were actually buying. The inspection walkthrough alone saved us thousands in unexpected repairs."
+          name="Sarah M."
+          context="Home buyer"
+        />
+      </div>
+      <div data-reveal="up" data-reveal-delay="2">
+        <TestimonialCard
+          quote="We came in with a vision and a tight budget. John helped us figure out what was worth doing, what could wait, and what would actually add value. The kitchen turned out better than we imagined."
+          name="David & Rachel T."
+          context="Renovation clients"
+        />
+      </div>
+      <div data-reveal="up" data-reveal-delay="3">
+        <TestimonialCard
+          quote="I wanted to do the work myself but didn't know where to start. A two-hour session with John replaced weeks of YouTube research. He showed me the right approach and the right tools."
+          name="Marcus L."
+          context="DIY coaching client"
+        />
+      </div>
+    </div>
+  </Section>
+
+  {/* ==========================================
+      Section 7: Contact Form
+      ========================================== */}
+  <Section id="contact" padding="wide">
+    <div data-reveal="up">
+      <ContactForm
+        heading="Let's Talk About Your Home"
+        subtext="Free consultations. No pressure. Tell us a little about what you're looking for."
+        airtableEndpoint=""
       />
     </div>
   </Section>
 
   {/* ==========================================
-      Section 6: Final CTA
+      Section 8: Final CTA
       ========================================== */}
   <CTASection
-    headline="Ready to talk about your home?"
-    subtext="Free consultations. No pressure. Just a conversation about what's possible."
+    headline="Ready to start planning?"
+    subtext="Free estimates. Free consultations. Just a conversation about what's possible."
     buttonText="Schedule a Free Consultation"
-    buttonLink="/contact"
+    buttonLink="#contact"
     secondaryText="Or email us at hello@hive.com"
     secondaryLink="mailto:hello@hive.com"
     backgroundType="image"
@@ -224,6 +269,14 @@ import CTASection from '../components/CTASection.astro';
     gap: 1.5rem;
   }
 
+  .services-grid > div {
+    display: flex;
+  }
+
+  .services-grid > div > :global(.service-card) {
+    flex: 1;
+  }
+
   @media (max-width: 768px) {
     .services-grid {
       grid-template-columns: 1fr;
@@ -244,30 +297,17 @@ import CTASection from '../components/CTASection.astro';
     opacity: 0.75;
   }
 
-  #featured-projects :global(.container) {
-    max-width: 1400px;
-    padding-inline: 1rem;
+  .projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 900px;
+    margin-inline: auto;
   }
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem 2rem;
-  }
-
-  .projects-grid > :global(.before-after) {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-  }
-
-  @media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
+  @media (max-width: 600px) {
+    .projects-stack {
+      gap: 3rem;
     }
   }
 
@@ -358,7 +398,7 @@ import CTASection from '../components/CTASection.astro';
     }
   }
 
-  /* Section 5: Testimonials */
+  /* Section 6: Testimonials */
   .testimonials-intro {
     text-align: center;
     margin-bottom: 3rem;
@@ -368,6 +408,14 @@ import CTASection from '../components/CTASection.astro';
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+  }
+
+  .testimonials-grid > div {
+    display: flex;
+  }
+
+  .testimonials-grid > div > :global(.testimonial-card) {
+    flex: 1;
   }
 
   @media (max-width: 768px) {

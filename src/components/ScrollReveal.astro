@@ -1,0 +1,101 @@
+---
+/**
+ * ScrollReveal — drop this component once in the layout to enable
+ * fade-on-scroll animations across the entire site.
+ *
+ * Usage: add `data-reveal` to any element you want to animate in.
+ * Optional modifiers:
+ *   data-reveal="up"       — fade up (default)
+ *   data-reveal="left"     — fade from left
+ *   data-reveal="right"    — fade from right
+ *   data-reveal="scale"    — fade + scale up
+ *   data-reveal-delay="1"  — stagger delay (1 = 100ms, 2 = 200ms, etc.)
+ */
+---
+
+<style is:global>
+  /* Base hidden state */
+  [data-reveal] {
+    opacity: 0;
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Direction variants */
+  [data-reveal="up"],
+  [data-reveal=""] {
+    transform: translateY(28px);
+  }
+
+  [data-reveal="left"] {
+    transform: translateX(-28px);
+  }
+
+  [data-reveal="right"] {
+    transform: translateX(28px);
+  }
+
+  [data-reveal="scale"] {
+    transform: scale(0.95);
+  }
+
+  /* Revealed state */
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  /* Stagger delays */
+  [data-reveal-delay="1"] { transition-delay: 100ms; }
+  [data-reveal-delay="2"] { transition-delay: 200ms; }
+  [data-reveal-delay="3"] { transition-delay: 300ms; }
+  [data-reveal-delay="4"] { transition-delay: 400ms; }
+  [data-reveal-delay="5"] { transition-delay: 500ms; }
+  [data-reveal-delay="6"] { transition-delay: 600ms; }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initScrollReveal() {
+    const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    if (!elements.length) return;
+
+    // Check reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      elements.forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  // Init on load
+  document.addEventListener('DOMContentLoaded', initScrollReveal);
+
+  // Re-init if new content is added (e.g., Astro view transitions)
+  document.addEventListener('astro:page-load', initScrollReveal);
+</script>

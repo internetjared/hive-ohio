@@ -1,0 +1,370 @@
+---
+interface Props {
+  airtableEndpoint?: string;
+  downloadUrl?: string;
+}
+
+const {
+  airtableEndpoint = "",
+  downloadUrl = "/downloads/homeowner-planner.pdf",
+} = Astro.props;
+---
+
+<section class="lead-magnet" id="free-planner" data-lead-magnet>
+  <div class="container">
+    <div class="lm-grid">
+      <div class="lm-content">
+        <span class="lm-badge">Free Download</span>
+        <h2>The First-Time Homeowner Planner</h2>
+        <p class="lm-desc">
+          Stay ahead of maintenance, not behind it. This planner keeps you on track with everything from air filter replacements to seasonal checkups — so nothing sneaks up on you.
+        </p>
+        <ul class="lm-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8L6.5 11L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Month-by-month maintenance schedule
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8L6.5 11L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Filter, HVAC & appliance replacement tracker
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8L6.5 11L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Seasonal prep checklists (winter, spring, fall)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8L6.5 11L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Long-term cost planning worksheet
+          </li>
+        </ul>
+      </div>
+
+      <div class="lm-form-wrap">
+        <div class="lm-card">
+          <div class="lm-card-icon">
+            {/* Clipboard / checklist icon */}
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2"/>
+              <path d="M9 2V4H15V2"/>
+              <path d="M9 12L11 14L15 10"/>
+              <line x1="9" y1="18" x2="15" y2="18"/>
+            </svg>
+          </div>
+          <h3>Get your free planner</h3>
+          <form class="lm-form" data-lm-form data-airtable-endpoint={airtableEndpoint} data-download-url={downloadUrl}>
+            <div class="lm-form-group">
+              <label for="lm-name" class="sr-only">First name</label>
+              <input type="text" id="lm-name" name="name" required placeholder="First name" autocomplete="given-name" />
+            </div>
+            <div class="lm-form-group">
+              <label for="lm-email" class="sr-only">Email</label>
+              <input type="email" id="lm-email" name="email" required placeholder="Email address" autocomplete="email" />
+            </div>
+            <button type="submit" class="btn btn-primary lm-submit">
+              <span class="lm-submit-text">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download Free Planner
+              </span>
+              <span class="lm-submit-loading" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2.5" stroke-dasharray="31.4 31.4" stroke-linecap="round">
+                    <animateTransform attributeName="transform" type="rotate" dur="0.8s" from="0 12 12" to="360 12 12" repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </span>
+            </button>
+            <p class="lm-privacy">We respect your privacy. Unsubscribe anytime.</p>
+          </form>
+
+          <div class="lm-success" aria-live="polite">
+            <div class="lm-success-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 20L18 26L28 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Your planner is downloading!</h3>
+            <p>Check your email for additional homeowner resources.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lead-magnet {
+    padding: 5rem 0;
+    background: var(--color-forest);
+    color: var(--color-page);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle geometric pattern behind */
+  .lead-magnet::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(121, 137, 88, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(200, 146, 56, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .lm-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .lm-badge {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(121, 137, 88, 0.3);
+    border: 1px solid rgba(121, 137, 88, 0.4);
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+    color: var(--color-meadow);
+  }
+
+  .lm-content h2 {
+    color: var(--color-page);
+    margin-bottom: 1rem;
+  }
+
+  .lm-desc {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    max-width: 50ch;
+  }
+
+  .lm-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .lm-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    opacity: 0.8;
+  }
+
+  .lm-features svg {
+    color: var(--color-meadow);
+    flex-shrink: 0;
+  }
+
+  /* Card */
+  .lm-card {
+    background: rgba(248, 243, 224, 0.06);
+    border: 1px solid rgba(248, 243, 224, 0.12);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(8px);
+    position: relative;
+  }
+
+  .lm-card-icon {
+    text-align: center;
+    color: var(--color-meadow);
+    margin-bottom: 1rem;
+  }
+
+  .lm-card h3 {
+    text-align: center;
+    color: var(--color-page);
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .lm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .lm-form input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-earth);
+    background: rgba(248, 243, 224, 0.92);
+    border: 1.5px solid rgba(248, 243, 224, 0.4);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .lm-form input::placeholder {
+    color: var(--color-earth);
+    opacity: 0.4;
+  }
+
+  .lm-form input:focus {
+    outline: none;
+    border-color: var(--color-olive);
+    box-shadow: 0 0 0 3px rgba(121, 137, 88, 0.25);
+  }
+
+  .lm-submit {
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  .lm-submit-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lm-submit-loading {
+    display: none;
+  }
+
+  .lm-form.is-loading .lm-submit-text { display: none; }
+  .lm-form.is-loading .lm-submit-loading { display: flex; }
+  .lm-form.is-loading .lm-submit { pointer-events: none; opacity: 0.7; }
+
+  .lm-privacy {
+    text-align: center;
+    font-size: 0.75rem;
+    opacity: 0.45;
+    margin-top: 0.25rem;
+  }
+
+  /* Success */
+  .lm-success {
+    display: none;
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+
+  .lm-success.is-visible {
+    display: block;
+    animation: lmFadeIn 0.5s ease;
+  }
+
+  .lm-success-icon {
+    color: var(--color-meadow);
+    margin-bottom: 1rem;
+  }
+
+  .lm-success h3 {
+    color: var(--color-page);
+    margin-bottom: 0.5rem;
+  }
+
+  .lm-success p {
+    opacity: 0.7;
+    margin-inline: auto;
+    font-size: 0.9rem;
+  }
+
+  .lm-form.is-hidden { display: none; }
+  .lm-card .lm-privacy { display: block; }
+  .lm-form.is-hidden + .lm-success + .lm-privacy { display: none; }
+
+  @keyframes lmFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .lm-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .lm-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .lead-magnet {
+      padding: 3.5rem 0;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-lm-form]').forEach((form) => {
+    const card = form.closest('.lm-card');
+    const success = card?.querySelector<HTMLElement>('.lm-success');
+    if (!success) return;
+
+    const endpoint = form.dataset.airtableEndpoint || '';
+    const downloadUrl = form.dataset.downloadUrl || '';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = (form.querySelector<HTMLInputElement>('#lm-name')!).value.trim();
+      const email = (form.querySelector<HTMLInputElement>('#lm-email')!).value.trim();
+
+      if (!name || !email) return;
+
+      form.classList.add('is-loading');
+
+      try {
+        if (endpoint) {
+          await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              records: [{
+                fields: {
+                  Name: name,
+                  Email: email,
+                  Source: 'Homeowner Planner Lead Magnet',
+                  Date: new Date().toISOString().split('T')[0],
+                }
+              }]
+            }),
+          });
+        }
+
+        // Trigger download
+        if (downloadUrl) {
+          const a = document.createElement('a');
+          a.href = downloadUrl;
+          a.download = '';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+
+        form.classList.add('is-hidden');
+        form.classList.remove('is-loading');
+        success.classList.add('is-visible');
+      } catch (err) {
+        console.error('Lead magnet submission error:', err);
+        form.classList.remove('is-loading');
+        // Still show success + trigger download
+        if (downloadUrl) {
+          const a = document.createElement('a');
+          a.href = downloadUrl;
+          a.download = '';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+        form.classList.add('is-hidden');
+        success.classList.add('is-visible');
+      }
+    });
+  });
+</script>

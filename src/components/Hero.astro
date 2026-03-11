@@ -85,12 +85,15 @@ const {
 
   .hero-slide {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    top: -15%;
+    left: -15%;
+    width: 130%;
+    height: 130%;
+    max-width: none;
     object-fit: cover;
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
+    will-change: transform;
   }
 
   .hero-slide.is-active {
@@ -268,5 +271,27 @@ const {
       goTo(current + 1);
       resetTimer();
     });
+
+    // Subtle parallax on scroll
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+      let ticking = false;
+      const heroBg = hero.querySelector<HTMLElement>('.hero-bg');
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const heroH = hero.offsetHeight;
+            if (scrollY <= heroH && heroBg) {
+              const offset = scrollY * 0.25;
+              heroBg.style.transform = `translate3d(0, ${offset}px, 0)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
   });
 </script>
