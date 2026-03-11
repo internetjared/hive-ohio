@@ -1,0 +1,62 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  context?: string;
+}
+
+const { quote, name, context } = Astro.props;
+---
+
+<blockquote class="testimonial-card">
+  <svg class="testimonial-quote-mark" width="40" height="32" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+    <path d="M0 32V20C0 14.667 1.167 10.333 3.5 7C5.833 3.667 9.5 1.333 14.5 0L16.5 4C13.5 5 11.167 6.5 9.5 8.5C7.833 10.5 7 12.833 7 15.5H14V32H0ZM24 32V20C24 14.667 25.167 10.333 27.5 7C29.833 3.667 33.5 1.333 38.5 0L40.5 4C37.5 5 35.167 6.5 33.5 8.5C31.833 10.5 31 12.833 31 15.5H38V32H24Z" fill="currentColor"/>
+  </svg>
+  <p class="testimonial-text">{quote}</p>
+  <footer class="testimonial-attribution">
+    <cite class="testimonial-name">{name}</cite>
+    {context && <span class="testimonial-context">{context}</span>}
+  </footer>
+</blockquote>
+
+<style>
+  .testimonial-card {
+    position: relative;
+    padding: 2.5rem 2rem 2rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(60, 56, 47, 0.06);
+  }
+
+  .testimonial-quote-mark {
+    color: var(--color-olive);
+    opacity: 0.2;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--color-earth);
+  }
+
+  .testimonial-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .testimonial-name {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-earth);
+  }
+
+  .testimonial-context {
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
+</style>

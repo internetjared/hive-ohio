@@ -1,0 +1,90 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon?: string;
+}
+
+const { title, description, href, icon } = Astro.props;
+---
+
+<a href={href} class="service-card">
+  <div class="service-card-icon" aria-hidden="true">
+    <slot name="icon">
+      {/* Default placeholder icon */}
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </slot>
+  </div>
+  <h3 class="service-card-title">{title}</h3>
+  <p class="service-card-desc">{description}</p>
+  <span class="service-card-link">
+    Learn More
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+</a>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.5rem 2rem;
+    background-color: rgba(121, 137, 88, 0.04);
+    border: 1px solid rgba(121, 137, 88, 0.12);
+    border-radius: 8px;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    text-decoration: none;
+    color: var(--color-earth);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(60, 56, 47, 0.08);
+    border-color: rgba(121, 137, 88, 0.25);
+  }
+
+  .service-card:focus-visible {
+    outline: 2px solid var(--color-olive);
+    outline-offset: 3px;
+  }
+
+  .service-card-icon {
+    color: var(--color-olive);
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card-title {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-earth);
+  }
+
+  .service-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .service-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-olive);
+    transition: gap var(--transition-fast);
+  }
+
+  .service-card:hover .service-card-link {
+    gap: 0.7rem;
+  }
+</style>

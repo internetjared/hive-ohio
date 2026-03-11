@@ -1,0 +1,398 @@
+---
+interface Props {
+  beforeImage: string;
+  afterImage: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  projectName?: string;
+  description?: string;
+  href?: string;
+}
+
+const {
+  beforeImage,
+  afterImage,
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+  projectName,
+  description,
+  href,
+} = Astro.props;
+---
+
+<div class="before-after">
+  {projectName && (
+    <div class="before-after-header">
+      <h3 class="before-after-title">{projectName}</h3>
+      {description && <p class="before-after-desc">{description}</p>}
+    </div>
+  )}
+
+  <div class="ba-viewer" data-ba-viewer style="--position: 0%">
+    <div class="ba-base">
+      <img src={beforeImage} alt={`${projectName || 'Project'} — before`} loading="lazy" draggable="false" />
+    </div>
+    <div class="ba-overlay">
+      <img src={afterImage} alt={`${projectName || 'Project'} — after`} loading="lazy" draggable="false" />
+    </div>
+
+    <span class="ba-label ba-label--before">{beforeLabel}</span>
+    <span class="ba-label ba-label--after">{afterLabel}</span>
+
+    <div
+      class="ba-handle"
+      role="slider"
+      aria-label="Before and after comparison slider"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      tabindex="0"
+    >
+      <div class="ba-handle-line"></div>
+      <div class="ba-handle-thumb">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 5L4 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15 5L20 12L15 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  {href && (
+    <a href={href} class="before-after-link">
+      View Full Project
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  )}
+</div>
+
+<style>
+  .before-after {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .before-after-header {
+    text-align: center;
+  }
+
+  .before-after-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+    color: inherit;
+  }
+
+  .before-after-desc {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    max-width: 50ch;
+    margin-inline: auto;
+  }
+
+  /* === Viewer container === */
+  .ba-viewer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: col-resize;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* === Before image (base layer, always fully visible) === */
+  .ba-base {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ba-base img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* === After image (clipped overlay, revealed by sliding) === */
+  .ba-overlay {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 calc(100% - var(--position)) 0 0);
+    z-index: 1;
+  }
+
+  .ba-overlay img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* === Labels === */
+  .ba-label {
+    position: absolute;
+    top: 1rem;
+    padding: 0.35rem 0.85rem;
+    background-color: rgba(60, 56, 47, 0.8);
+    color: var(--color-page);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    backdrop-filter: blur(6px);
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .ba-label--before {
+    left: 1rem;
+  }
+
+  .ba-label--after {
+    right: 1rem;
+  }
+
+  /* === Handle (draggable divider) === */
+  .ba-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--position);
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    outline: none;
+  }
+
+  .ba-handle-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    background-color: rgba(248, 243, 224, 0.9);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .ba-handle-thumb {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(248, 243, 224, 0.95);
+    color: var(--color-earth);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .ba-handle:hover .ba-handle-thumb,
+  .ba-handle:focus-visible .ba-handle-thumb {
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .ba-handle:focus-visible .ba-handle-line {
+    background-color: var(--color-olive);
+  }
+
+  .ba-handle:focus-visible .ba-handle-thumb {
+    outline: 3px solid var(--color-olive);
+    outline-offset: 2px;
+  }
+
+  /* Pulse hint after auto-reveal completes */
+  .ba-handle--pulse .ba-handle-thumb {
+    animation: ba-pulse 0.6s ease-in-out 2;
+  }
+
+  @keyframes ba-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+
+  /* === Link === */
+  .before-after-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-page);
+    opacity: 0.8;
+    transition: opacity var(--transition-fast), gap var(--transition-fast);
+  }
+
+  .before-after-link:hover {
+    opacity: 1;
+    gap: 0.7rem;
+  }
+
+  /* === Mobile === */
+  @media (max-width: 600px) {
+    .ba-viewer {
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+    }
+
+    .ba-handle-thumb {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ba-handle-thumb svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ba-label {
+      font-size: 0.6rem;
+      padding: 0.25rem 0.6rem;
+      top: 0.6rem;
+    }
+
+    .ba-label--before { left: 0.6rem; }
+    .ba-label--after { right: 0.6rem; }
+
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ba-viewer]').forEach((viewer) => {
+    const handle = viewer.querySelector<HTMLElement>('.ba-handle');
+    if (!handle) return;
+    if (viewer.dataset.baInit === 'true') return;
+    viewer.dataset.baInit = 'true';
+
+    let isDragging = false;
+    let isAnimating = false;
+    let animationId: number | null = null;
+
+    function setPos(pct: number) {
+      viewer.style.setProperty('--position', `${pct}%`);
+      handle.setAttribute('aria-valuenow', String(Math.round(pct)));
+    }
+
+    function setPosition(clientX: number) {
+      const rect = viewer.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      setPos(pct);
+    }
+
+    // Ease-out cubic for a natural slow-down
+    function easeOutCubic(t: number): number {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    // Auto-reveal animation: 0% → 100% with ease-out (slows at end)
+    function autoReveal() {
+      isAnimating = true;
+      const duration = 2200; // ms
+      const start = performance.now();
+
+      function tick(now: number) {
+        const elapsed = now - start;
+        const t = Math.min(elapsed / duration, 1);
+        const eased = easeOutCubic(t);
+        setPos(eased * 100);
+
+        if (t < 1) {
+          animationId = requestAnimationFrame(tick);
+        } else {
+          isAnimating = false;
+          animationId = null;
+          // Pulse the handle to hint it's draggable
+          handle.classList.add('ba-handle--pulse');
+          setTimeout(() => handle.classList.remove('ba-handle--pulse'), 1200);
+        }
+      }
+
+      animationId = requestAnimationFrame(tick);
+    }
+
+    // Cancel animation if user interacts
+    function stopAnimation() {
+      if (animationId !== null) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+      isAnimating = false;
+    }
+
+    // Intersection Observer — trigger reveal when visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            autoReveal();
+            observer.disconnect();
+          }
+        }
+      },
+      { threshold: 0.7 }
+    );
+    observer.observe(viewer);
+
+    // Mouse events
+    viewer.addEventListener('mousedown', (e: MouseEvent) => {
+      stopAnimation();
+      isDragging = true;
+      setPosition(e.clientX);
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!isDragging) return;
+      setPosition(e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch events
+    viewer.addEventListener('touchstart', (e: TouchEvent) => {
+      stopAnimation();
+      isDragging = true;
+      setPosition(e.touches[0].clientX);
+    }, { passive: true });
+
+    viewer.addEventListener('touchmove', (e: TouchEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      setPosition(e.touches[0].clientX);
+    }, { passive: false });
+
+    viewer.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // Keyboard
+    handle.addEventListener('keydown', (e: KeyboardEvent) => {
+      stopAnimation();
+      const current = parseFloat(viewer.style.getPropertyValue('--position')) || 0;
+      let next = current;
+      if (e.key === 'ArrowLeft') next = Math.max(0, current - 5);
+      else if (e.key === 'ArrowRight') next = Math.min(100, current + 5);
+      else return;
+      e.preventDefault();
+      setPos(next);
+    });
+  });
+</script>

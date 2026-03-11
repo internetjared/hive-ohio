@@ -1,0 +1,61 @@
+---
+interface Props {
+  id?: string;
+  background?: 'page' | 'earth' | 'forest' | 'olive' | 'meadow' | 'ancient-page';
+  padding?: 'default' | 'narrow' | 'wide';
+  class?: string;
+}
+
+const {
+  id,
+  background = 'page',
+  padding = 'default',
+  class: className = '',
+} = Astro.props;
+
+const bgMap: Record<string, string> = {
+  page: 'var(--color-page)',
+  earth: 'var(--color-earth)',
+  forest: 'var(--color-forest)',
+  olive: 'var(--color-olive)',
+  meadow: 'var(--color-meadow)',
+  'ancient-page': 'var(--color-ancient-page)',
+};
+
+const isDark = ['earth', 'forest', 'olive'].includes(background);
+---
+
+<section
+  id={id}
+  class:list={['section', `section--${padding}`, { 'section--dark': isDark }, className]}
+  style={`background-color: ${bgMap[background]}`}
+>
+  <div class="container">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 5rem 0;
+  }
+
+  .section--narrow {
+    padding: 3rem 0;
+  }
+
+  .section--wide {
+    padding: 7rem 0;
+  }
+
+  .section--dark {
+    color: var(--color-page);
+  }
+
+  .section--dark :global(h1),
+  .section--dark :global(h2),
+  .section--dark :global(h3),
+  .section--dark :global(h4) {
+    color: var(--color-page);
+  }
+</style>
