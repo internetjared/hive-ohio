@@ -48,7 +48,13 @@ import CTASection from '../components/CTASection.astro';
         href="/services/real-estate"
       >
         <svg slot="icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <path d="M6 44V20L24 6L42 20V44H30V30H18V44H6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          {/* House with magnifying glass — inspection/evaluation */}
+          <path d="M6 22L22 8L38 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 20v20h10v-12h4v12h14V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 28h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="37" cy="14" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M42 19l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M35 12l1 4M34 14h6" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
         </svg>
       </ServiceCard>
 
@@ -58,9 +64,14 @@ import CTASection from '../components/CTASection.astro';
         href="/services/renovations"
       >
         <svg slot="icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <path d="M28 6L42 20L38 24L24 10L28 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M24 10L10 24L6 42L24 38L38 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M6 42L19 29" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          {/* Hammer + carpenter square — construction meets precision */}
+          <path d="M6 6v36h4V10h28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 14h2M10 20h2M10 26h2M10 32h2M10 38h2" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          <path d="M16 10h2M22 10h2M28 10h2M34 10h2" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5" transform="rotate(90 24 10)"/>
+          <path d="M28 18l-8 8 2 2 8-8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M30 16l6-4 4 4-4 6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M22 28l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 34l4 4M10 36l6 2M12 38l2-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </ServiceCard>
 
@@ -70,9 +81,14 @@ import CTASection from '../components/CTASection.astro';
         href="/services/diy-coaching"
       >
         <svg slot="icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="16" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <path d="M12 42C12 35.373 17.373 30 24 30C30.627 30 36 35.373 36 42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          <path d="M34 14L42 10M34 18L40 20M34 22L38 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          {/* Lightbulb + wrench — knowledge meets hands-on skill */}
+          <path d="M18 18a8 8 0 1 1 10.5 7.6c-.8.7-1.5 1.9-1.5 3.4v1h-6v-1c0-1.5-.7-2.7-1.5-3.4A8 8 0 0 1 18 18z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M21 30h6v3a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M24 4v4M38 18h-4M14 18h-4M34.5 8.5l-2.8 2.8M13.5 8.5l2.8 2.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          <path d="M6 38l4.5-4.5M4.5 39.5l2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="9" cy="41" r="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M11 39l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M13 33l5 5M15 35l-4-1 1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </ServiceCard>
     </div>
