@@ -39,6 +39,9 @@ const {
     <span class="ba-label ba-label--before">{beforeLabel}</span>
     <span class="ba-label ba-label--after">{afterLabel}</span>
 
+    <div class="ba-edge-glow ba-edge-glow--before"></div>
+    <div class="ba-edge-glow ba-edge-glow--after"></div>
+
     <div
       class="ba-handle"
       role="slider"
@@ -147,7 +150,7 @@ const {
     backdrop-filter: blur(6px);
     z-index: 3;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, background-color 0.4s ease;
   }
 
   .ba-label--before {
@@ -156,6 +159,25 @@ const {
 
   .ba-label--after {
     right: 1rem;
+  }
+
+  /* === Edge glow overlays === */
+  .ba-edge-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+  }
+
+  .ba-edge-glow--before {
+    background: linear-gradient(to right, rgba(121, 137, 88, 0.25) 0%, transparent 40%);
+  }
+
+  .ba-edge-glow--after {
+    background: linear-gradient(to left, rgba(121, 137, 88, 0.25) 0%, transparent 40%);
+    z-index: 2;
   }
 
   /* === Handle (draggable divider) === */
@@ -195,12 +217,11 @@ const {
     background-color: rgba(248, 243, 224, 0.95);
     color: var(--color-earth);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: box-shadow 0.15s ease, transform 0.25s ease;
   }
 
   .ba-handle:hover .ba-handle-thumb,
   .ba-handle:focus-visible .ba-handle-thumb {
-    transform: scale(1.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   }
 
@@ -275,17 +296,51 @@ const {
 <script>
   document.querySelectorAll<HTMLElement>('[data-ba-viewer]').forEach((viewer) => {
     const handle = viewer.querySelector<HTMLElement>('.ba-handle');
-    if (!handle) return;
+    const thumb = viewer.querySelector<HTMLElement>('.ba-handle-thumb');
+    const glowBefore = viewer.querySelector<HTMLElement>('.ba-edge-glow--before');
+    const glowAfter = viewer.querySelector<HTMLElement>('.ba-edge-glow--after');
+    const labelBefore = viewer.querySelector<HTMLElement>('.ba-label--before');
+    const labelAfter = viewer.querySelector<HTMLElement>('.ba-label--after');
+    if (!handle || !thumb) return;
     if (viewer.dataset.baInit === 'true') return;
     viewer.dataset.baInit = 'true';
 
     let isDragging = false;
     let isAnimating = false;
     let animationId: number | null = null;
+    let currentScale = 1;
+
+    const olive = 'rgba(121, 137, 88, 0.95)';
+    const neutral = 'rgba(60, 56, 47, 0.8)';
+
+    function lerpScale(target: number) {
+      // Smooth interpolation toward target scale
+      currentScale += (target - currentScale) * 0.15;
+      if (Math.abs(currentScale - target) < 0.005) currentScale = target;
+      thumb.style.transform = `scale(${currentScale})`;
+    }
+
+    function updateEdgeEffects(pct: number) {
+      // Handle grows when near edges (0% or 100%)
+      const distFromEdge = Math.min(pct, 100 - pct);
+      const edgeZone = 15;
+      const edgeFactor = Math.max(0, 1 - distFromEdge / edgeZone);
+      const targetScale = 1 + edgeFactor * 0.35;
+      lerpScale(targetScale);
+
+      // Glow: before glow when near 0%, after glow when near 100%
+      if (glowBefore) glowBefore.style.opacity = String(pct < edgeZone ? edgeFactor : 0);
+      if (glowAfter) glowAfter.style.opacity = String((100 - pct) < edgeZone ? edgeFactor : 0);
+
+      // Labels: highlight the dominant side in olive green
+      if (labelBefore) labelBefore.style.backgroundColor = pct < 40 ? olive : neutral;
+      if (labelAfter) labelAfter.style.backgroundColor = pct > 60 ? olive : neutral;
+    }
 
     function setPos(pct: number) {
       viewer.style.setProperty('--position', `${pct}%`);
       handle.setAttribute('aria-valuenow', String(Math.round(pct)));
+      updateEdgeEffects(pct);
     }
 
     function setPosition(clientX: number) {
