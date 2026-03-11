@@ -100,43 +100,35 @@ import LeadMagnet from '../components/LeadMagnet.astro';
       <h2>See the Transformation</h2>
       <p>Real projects. Real results. Every renovation starts with a plan and ends with a home you love.</p>
     </div>
-    <div class="projects-stack">
-      <div data-reveal="up">
-        <BeforeAfter
-          projectName="Kitchen Renovation"
-          description="Complete kitchen transformation with structural upgrades"
-          beforeImage="/images/photos/214-np/kitchen-before.jpg"
-          afterImage="/images/photos/214-np/kitchen-after.jpg"
-          href="/projects"
-        />
-      </div>
-      <div data-reveal="up">
-        <BeforeAfter
-          projectName="Bathroom Remodel"
-          description="Updated vanity and finishes for a clean, modern look"
-          beforeImage="/images/photos/214-np/bathroom-before.jpg"
-          afterImage="/images/photos/214-np/bathroom-after.jpg"
-          href="/projects"
-        />
-      </div>
-      <div data-reveal="up">
-        <BeforeAfter
-          projectName="Exterior Refresh"
-          description="Full curb appeal overhaul from foundation to roof"
-          beforeImage="/images/photos/2010-mh/exterior-before.jpg"
-          afterImage="/images/photos/2010-mh/exterior-after.jpg"
-          href="/projects"
-        />
-      </div>
-      <div data-reveal="up">
-        <BeforeAfter
-          projectName="Patio & Stone Path"
-          description="Custom stone patio and walkway from bare yard to outdoor living space"
-          beforeImage="/images/photos/patio-before.png"
-          afterImage="/images/photos/patio-after.jpg"
-          href="/projects"
-        />
-      </div>
+    <div class="projects-grid">
+      <BeforeAfter
+        projectName="Kitchen Renovation"
+        description="Complete kitchen transformation with structural upgrades"
+        beforeImage="/images/photos/214-np/kitchen-before.jpg"
+        afterImage="/images/photos/214-np/kitchen-after.jpg"
+        href="/projects"
+      />
+      <BeforeAfter
+        projectName="Bathroom Remodel"
+        description="Updated vanity and finishes for a clean, modern look"
+        beforeImage="/images/photos/214-np/bathroom-before.jpg"
+        afterImage="/images/photos/214-np/bathroom-after.jpg"
+        href="/projects"
+      />
+      <BeforeAfter
+        projectName="Exterior Refresh"
+        description="Full curb appeal overhaul from foundation to roof"
+        beforeImage="/images/photos/2010-mh/exterior-before.jpg"
+        afterImage="/images/photos/2010-mh/exterior-after.jpg"
+        href="/projects"
+      />
+      <BeforeAfter
+        projectName="Patio & Stone Path"
+        description="Custom stone patio and walkway from bare yard to outdoor living space"
+        beforeImage="/images/photos/patio-before.png"
+        afterImage="/images/photos/patio-after.jpg"
+        href="/projects"
+      />
     </div>
     <div class="projects-cta" data-reveal="up">
       <a href="/projects" class="btn btn-secondary">View All Projects</a>
@@ -297,17 +289,25 @@ import LeadMagnet from '../components/LeadMagnet.astro';
     opacity: 0.75;
   }
 
-  .projects-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    max-width: 900px;
-    margin-inline: auto;
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
   }
 
-  @media (max-width: 600px) {
-    .projects-stack {
-      gap: 3rem;
+  .projects-grid > :global(.before-after) {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
   }
 
