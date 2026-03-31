@@ -7,7 +7,6 @@ import BeforeAfter from '../components/BeforeAfter.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
 import CTASection from '../components/CTASection.astro';
 import ContactForm from '../components/ContactForm.astro';
-import LeadMagnet from '../components/LeadMagnet.astro';
 ---
 
 <BaseLayout
@@ -48,7 +47,7 @@ import LeadMagnet from '../components/LeadMagnet.astro';
         <ServiceCard
           title="Real Estate"
           description="Not just buying and selling — understanding what you're getting, what it will cost, and how it fits your plan. Engineering judgment meets real estate guidance."
-          href="/services/real-estate"
+          href="#contact"
         >
           {/* Tabler: home-search (MIT) */}
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -64,7 +63,7 @@ import LeadMagnet from '../components/LeadMagnet.astro';
         <ServiceCard
           title="Renovations"
           description="Hands-on construction from kitchens to whole-house transformations. PE-backed planning meets craftsmanship. Structural, not just cosmetic."
-          href="/services/renovations"
+          href="#contact"
         >
           {/* Lucide: hammer (ISC) */}
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -79,7 +78,7 @@ import LeadMagnet from '../components/LeadMagnet.astro';
         <ServiceCard
           title="DIY Coaching"
           description="Guidance for homeowners who want to be involved. One-on-one consults, video walkthroughs, workshop setup. Do it right, whether you hire us or do it yourself."
-          href="/services/diy-coaching"
+          href="#contact"
         >
           {/* Lucide: lightbulb (ISC) */}
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -106,32 +105,29 @@ import LeadMagnet from '../components/LeadMagnet.astro';
         description="Complete kitchen transformation with structural upgrades"
         beforeImage="/images/photos/214-np/kitchen-before.jpg"
         afterImage="/images/photos/214-np/kitchen-after.jpg"
-        href="/projects"
+
       />
       <BeforeAfter
         projectName="Bathroom Remodel"
         description="Updated vanity and finishes for a clean, modern look"
         beforeImage="/images/photos/214-np/bathroom-before.jpg"
         afterImage="/images/photos/214-np/bathroom-after.jpg"
-        href="/projects"
+
       />
       <BeforeAfter
         projectName="Exterior Refresh"
         description="Full curb appeal overhaul from foundation to roof"
         beforeImage="/images/photos/2010-mh/exterior-before.jpg"
         afterImage="/images/photos/2010-mh/exterior-after.jpg"
-        href="/projects"
+
       />
       <BeforeAfter
         projectName="Patio & Stone Path"
         description="Custom stone patio and walkway from bare yard to outdoor living space"
         beforeImage="/images/photos/patio-before.png"
         afterImage="/images/photos/patio-after.jpg"
-        href="/projects"
+
       />
-    </div>
-    <div class="projects-cta" data-reveal="up">
-      <a href="/projects" class="btn btn-secondary">View All Projects</a>
     </div>
   </Section>
 
@@ -165,23 +161,13 @@ import LeadMagnet from '../components/LeadMagnet.astro';
             Project Management Professional (PMP) — In Progress
           </li>
         </ul>
-        <a href="/about" class="btn btn-outline">Our Story</a>
+        <a href="#contact" class="btn btn-outline">Work With Us</a>
       </div>
     </div>
   </Section>
 
   {/* ==========================================
-      Section 5: Lead Magnet — Homeowner Planner
-      ========================================== */}
-  <div data-reveal="up">
-    <LeadMagnet
-      airtableEndpoint=""
-      downloadUrl="/downloads/homeowner-planner.pdf"
-    />
-  </div>
-
-  {/* ==========================================
-      Section 6: Testimonials
+      Section 5: Testimonials
       ========================================== */}
   <Section id="testimonials" background="ancient-page">
     <div class="testimonials-intro" data-reveal="up">
@@ -220,7 +206,7 @@ import LeadMagnet from '../components/LeadMagnet.astro';
       <ContactForm
         heading="Let's Talk About Your Home"
         subtext="Free consultations. No pressure. Tell us a little about what you're looking for."
-        airtableEndpoint=""
+        formAccessKey="YOUR_WEB3FORMS_KEY"
       />
     </div>
   </Section>
@@ -233,8 +219,8 @@ import LeadMagnet from '../components/LeadMagnet.astro';
     subtext="Free estimates. Free consultations. Just a conversation about what's possible."
     buttonText="Schedule a Free Consultation"
     buttonLink="#contact"
-    secondaryText="Or email us at hello@hive.com"
-    secondaryLink="mailto:hello@hive.com"
+    secondaryText="Or email us at hello@hiveohio.com"
+    secondaryLink="mailto:hello@hiveohio.com"
     backgroundType="image"
     backgroundValue="/images/photos/favorites/46wt-backyard-south.jpg"
   />
@@ -309,11 +295,6 @@ import LeadMagnet from '../components/LeadMagnet.astro';
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
-  }
-
-  .projects-cta {
-    text-align: center;
-    margin-top: 3rem;
   }
 
   /* Section 4: About */

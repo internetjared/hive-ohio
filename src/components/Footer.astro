@@ -2,14 +2,11 @@
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services/real-estate', label: 'Real Estate' },
-  { href: '/services/renovations', label: 'Renovations' },
-  { href: '/services/diy-coaching', label: 'DIY Coaching' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/tools', label: 'Tools' },
-  { href: '/contact', label: 'Contact' },
+  { href: '#services', label: 'Services' },
+  { href: '#featured-projects', label: 'Projects' },
+  { href: '#about-teaser', label: 'About' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#contact', label: 'Contact' },
 ];
 ---
 
@@ -38,10 +35,10 @@ const navLinks = [
     <div class="footer-contact">
       <h4 class="footer-heading">Get in Touch</h4>
       <ul>
-        <li><a href="mailto:hello@hive.com">hello@hive.com</a></li>
+        <li><a href="mailto:hello@hiveohio.com">hello@hiveohio.com</a></li>
         <li>Central Ohio</li>
       </ul>
-      <a href="/contact" class="btn btn-secondary footer-cta">Schedule a Consultation</a>
+      <a href="#contact" class="btn btn-secondary footer-cta">Schedule a Consultation</a>
     </div>
   </div>
 
@@ -71,7 +68,6 @@ const navLinks = [
     height: 60px;
     object-fit: contain;
     margin-bottom: 1rem;
-    /* Invert to make it work on dark bg - or we could use a white version */
     filter: brightness(1.8) saturate(0.5);
   }
 

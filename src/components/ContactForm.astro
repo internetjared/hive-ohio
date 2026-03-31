@@ -2,13 +2,13 @@
 interface Props {
   heading?: string;
   subtext?: string;
-  airtableEndpoint?: string;
+  formAccessKey?: string;
 }
 
 const {
   heading = "Let's Talk About Your Home",
   subtext = "Free consultations. No pressure. Tell us a little about what you're looking for.",
-  airtableEndpoint = "",
+  formAccessKey = "",
 } = Astro.props;
 ---
 
@@ -18,7 +18,12 @@ const {
     {subtext && <p class="contact-form-sub">{subtext}</p>}
   </div>
 
-  <form class="contact-form" data-airtable-endpoint={airtableEndpoint}>
+  <form class="contact-form" data-form-key={formAccessKey}>
+    <input type="hidden" name="access_key" value={formAccessKey} />
+    <input type="hidden" name="subject" value="New HIVE Contact Form Submission" />
+    <input type="hidden" name="from_name" value="HIVE Website" />
+    <input type="checkbox" name="botcheck" class="hidden-check" style="display:none" />
+
     <div class="form-row form-row--half">
       <div class="form-group">
         <label for="contact-name">Name</label>
@@ -261,7 +266,7 @@ const {
     const success = wrap.querySelector<HTMLElement>('.form-success');
     if (!form || !success) return;
 
-    const endpoint = form.dataset.airtableEndpoint || '';
+    const accessKey = form.dataset.formKey || '';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -286,24 +291,26 @@ const {
       form.classList.add('is-loading');
 
       try {
-        if (endpoint) {
-          await fetch(endpoint, {
+        if (accessKey) {
+          const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
-              records: [{
-                fields: {
-                  Name: name,
-                  Email: email,
-                  Phone: phone,
-                  Interest: interest,
-                  Message: message,
-                  Source: 'Homepage Contact Form',
-                  Date: new Date().toISOString().split('T')[0],
-                }
-              }]
+              access_key: accessKey,
+              name,
+              email,
+              phone,
+              interest,
+              message,
+              subject: 'New HIVE Contact Form Submission',
+              from_name: 'HIVE Website',
             }),
           });
+
+          const data = await res.json();
+          if (!data.success) {
+            console.error('Web3Forms error:', data);
+          }
         }
 
         // Show success
@@ -313,7 +320,7 @@ const {
       } catch (err) {
         console.error('Form submission error:', err);
         form.classList.remove('is-loading');
-        // Still show success to not block user — Airtable can be retried
+        // Still show success to not block user
         form.classList.add('is-hidden');
         success.classList.add('is-visible');
       }

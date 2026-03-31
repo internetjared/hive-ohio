@@ -1,26 +1,10 @@
 ---
-interface Props {
-  currentPage?: string;
-}
-
-const { currentPage = '' } = Astro.props;
-
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  {
-    href: '/services',
-    label: 'Services',
-    children: [
-      { href: '/services/real-estate', label: 'Real Estate' },
-      { href: '/services/renovations', label: 'Renovations' },
-      { href: '/services/diy-coaching', label: 'DIY Coaching' },
-    ],
-  },
-  { href: '/projects', label: 'Projects' },
-  { href: '/tools', label: 'Tools' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
+  { href: '#services', label: 'Services' },
+  { href: '#featured-projects', label: 'Projects' },
+  { href: '#about-teaser', label: 'About' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#contact', label: 'Contact' },
 ];
 ---
 
@@ -32,32 +16,15 @@ const navLinks = [
 
     <ul class="nav-links" id="nav-links">
       {navLinks.map((link) => (
-        <li class={`nav-item ${link.children ? 'has-dropdown' : ''}`}>
-          <a
-            href={link.href}
-            class={`nav-link ${currentPage === link.href ? 'is-active' : ''}`}
-          >
+        <li class="nav-item">
+          <a href={link.href} class="nav-link">
             {link.label}
-            {link.children && (
-              <svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            )}
           </a>
-          {link.children && (
-            <ul class="dropdown-menu">
-              {link.children.map((child) => (
-                <li>
-                  <a href={child.href} class="dropdown-link">{child.label}</a>
-                </li>
-              ))}
-            </ul>
-          )}
         </li>
       ))}
     </ul>
 
-    <a href="/contact" class="btn btn-primary nav-cta">Get in Touch</a>
+    <a href="#contact" class="btn btn-primary nav-cta">Get in Touch</a>
 
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span class="hamburger-line"></span>
@@ -116,52 +83,8 @@ const navLinks = [
     transition: color var(--transition-fast), background-color var(--transition-fast);
   }
 
-  .nav-link:hover,
-  .nav-link.is-active {
+  .nav-link:hover {
     color: var(--color-olive);
-  }
-
-  .dropdown-icon {
-    transition: transform var(--transition-fast);
-  }
-
-  .has-dropdown:hover .dropdown-icon {
-    transform: rotate(180deg);
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 200px;
-    padding: 0.5rem 0;
-    background-color: var(--color-page);
-    border-radius: 6px;
-    box-shadow: 0 8px 30px rgba(60, 56, 47, 0.12);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(4px);
-    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
-  }
-
-  .has-dropdown:hover .dropdown-menu,
-  .has-dropdown:focus-within .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .dropdown-link {
-    display: block;
-    padding: 0.6rem 1.25rem;
-    font-size: 0.875rem;
-    color: var(--color-earth);
-    transition: color var(--transition-fast), background-color var(--transition-fast);
-  }
-
-  .dropdown-link:hover {
-    color: var(--color-olive);
-    background-color: rgba(121, 137, 88, 0.06);
   }
 
   .nav-cta {
@@ -213,20 +136,6 @@ const navLinks = [
       font-size: 1.05rem;
     }
 
-    .dropdown-menu {
-      position: static;
-      box-shadow: none;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      padding-left: 1rem;
-      display: none;
-    }
-
-    .has-dropdown.is-open .dropdown-menu {
-      display: block;
-    }
-
     .nav-cta {
       display: none;
     }
@@ -269,12 +178,12 @@ const navLinks = [
     });
   }
 
-  // Mobile dropdown toggles
-  document.querySelectorAll('.has-dropdown > .nav-link').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        link.parentElement?.classList.toggle('is-open');
+  // Close mobile menu when an anchor link is clicked
+  document.querySelectorAll<HTMLAnchorElement>('.nav-link[href^="#"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (toggle && links && links.classList.contains('is-open')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        links.classList.remove('is-open');
       }
     });
   });
