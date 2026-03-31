@@ -314,7 +314,7 @@ const {
         }
 
         // Log to Google Sheet (fire and forget — don't block success)
-        fetch('https://script.google.com/macros/s/AKfycbzJtMaNqe5A34HqveXI1TpdRbcV0dLU2sdGBext1_JZR99GUuWShWqt89j4QP-3GABb/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbxHRLxa3iHfEBfaAqKyJCyrNvgH992B8rvOjqfjQI6lajYVlZq25JODye7pj0d4hxJl/exec', {
           method: 'POST',
           body: JSON.stringify({ name, email, phone, interest, message }),
         }).catch(() => {});
