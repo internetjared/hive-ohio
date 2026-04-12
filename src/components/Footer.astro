@@ -14,7 +14,7 @@ const navLinks = [
   <div class="footer-inner container">
     <div class="footer-brand">
       <a href="/" aria-label="HIVE — Home">
-        <img src="/images/logo/hive-logo-green.png" alt="HIVE logo" width="60" height="60" class="footer-logo" />
+        <img src="/images/logo/hive-hex-olive.png" alt="HIVE logo" width="60" height="60" class="footer-logo" />
       </a>
       <p class="footer-tagline">We aim to satisfy your current needs while planning for your future.</p>
       <div class="footer-credentials">
@@ -40,6 +40,17 @@ const navLinks = [
         <li>Central Ohio</li>
       </ul>
       <a href="#contact" class="btn btn-secondary footer-cta">Schedule a Consultation<span class="material-symbols-rounded" aria-hidden="true">calendar_today</span></a>
+    </div>
+  </div>
+
+  <div class="footer-compliance">
+    <div class="container">
+      <div class="compliance-badges">
+        <img src="/images/icons/equal-housing.svg" alt="Equal Housing Opportunity" width="40" height="44" class="compliance-badge" />
+        <span class="compliance-text">REALTOR&reg;</span>
+        <!-- Replace with official KW logo once downloaded from myKW portal -->
+        <span class="compliance-text compliance-text--sm">Keller Williams</span>
+      </div>
     </div>
   </div>
 
@@ -120,8 +131,41 @@ const navLinks = [
     padding: 0.6rem 1.25rem;
   }
 
-  .footer-bottom {
+  .footer-compliance {
     border-top: 1px solid rgba(248, 243, 224, 0.1);
+    padding: 1.25rem 0;
+  }
+
+  .compliance-badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .compliance-badge {
+    width: 40px;
+    height: auto;
+    opacity: 0.6;
+    filter: brightness(3);
+  }
+
+  .compliance-text {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+  }
+
+  .compliance-text--sm {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(248, 243, 224, 0.06);
     padding: 1.5rem 0;
   }
 
