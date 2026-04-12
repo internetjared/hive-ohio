@@ -153,6 +153,9 @@ p {
 
 .btn .material-symbols-rounded {
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  translate: 0 -1px;
 }
 
 /* ============================================
