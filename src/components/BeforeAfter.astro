@@ -30,10 +30,10 @@ const {
 
   <div class="ba-viewer" data-ba-viewer style="--position: 0%">
     <div class="ba-base">
-      <img src={beforeImage} alt={`${projectName || 'Project'} — before`} loading="lazy" draggable="false" />
+      <img src={beforeImage} alt={`${projectName || 'Project'} — before`} width="1200" height="675" loading="lazy" decoding="async" draggable="false" />
     </div>
     <div class="ba-overlay">
-      <img src={afterImage} alt={`${projectName || 'Project'} — after`} loading="lazy" draggable="false" />
+      <img src={afterImage} alt={`${projectName || 'Project'} — after`} width="1200" height="675" loading="lazy" decoding="async" draggable="false" />
     </div>
 
     <span class="ba-label ba-label--before">{beforeLabel}</span>
@@ -271,8 +271,8 @@ const {
     }
 
     .ba-handle-thumb {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
     }
 
     .ba-handle-thumb svg {

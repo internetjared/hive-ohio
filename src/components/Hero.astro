@@ -28,7 +28,11 @@ const {
       <img
         src={src}
         alt=""
+        width="1920"
+        height="1080"
         loading={i === 0 ? 'eager' : 'lazy'}
+        fetchpriority={i === 0 ? 'high' : undefined}
+        decoding={i === 0 ? 'sync' : 'async'}
         class={`hero-slide ${i === 0 ? 'is-active' : ''}`}
         data-slide-index={i}
       />
@@ -52,10 +56,10 @@ const {
     {subheadline && <p class="hero-subheadline">{subheadline}</p>}
     <div class="hero-actions">
       {ctaText && ctaLink && (
-        <a href={ctaLink} class="btn btn-primary"><span class="material-symbols-rounded" aria-hidden="true">chat_bubble</span>{ctaText}</a>
+        <a href={ctaLink} class="btn btn-primary">{ctaText}<span class="material-symbols-rounded" aria-hidden="true">chat_bubble</span></a>
       )}
       {secondaryCtaText && secondaryCtaLink && (
-        <a href={secondaryCtaLink} class="btn btn-secondary"><span class="material-symbols-rounded" aria-hidden="true">arrow_downward</span>{secondaryCtaText}</a>
+        <a href={secondaryCtaLink} class="btn btn-secondary">{secondaryCtaText}<span class="material-symbols-rounded" aria-hidden="true">arrow_downward</span></a>
       )}
     </div>
   </div>
@@ -211,8 +215,8 @@ const {
     }
 
     .hero-arrow {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
     }
 
     .hero-arrow--prev {

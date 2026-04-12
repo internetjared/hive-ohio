@@ -24,7 +24,7 @@ const navLinks = [
       ))}
     </ul>
 
-    <a href="#contact" class="btn btn-primary nav-cta"><span class="material-symbols-rounded" aria-hidden="true">mail</span>Get in Touch</a>
+    <a href="#contact" class="btn btn-primary nav-cta">Get in Touch<span class="material-symbols-rounded" aria-hidden="true">mail</span></a>
 
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span class="hamburger-line"></span>
@@ -97,6 +97,10 @@ const navLinks = [
     flex-direction: column;
     gap: 5px;
     padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
   .hamburger-line {

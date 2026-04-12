@@ -10,15 +10,16 @@ interface Props {
   description?: string;
   image?: string;
   currentPage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, image, currentPage } = Astro.props;
+const { title, description, image, currentPage, noindex } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={image} />
+    <BaseHead title={title} description={description} image={image} noindex={noindex} />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
