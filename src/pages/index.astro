@@ -274,16 +274,18 @@ import ContactForm from '../components/ContactForm.astro';
     opacity: 0.75;
   }
 
+  #featured-projects :global(.container) {
+    max-width: 1400px;
+  }
+
   .projects-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    max-width: 900px;
-    margin-inline: auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
   }
 
   .projects-grid > :global(.before-after) {
-    padding: 1rem;
+    padding: 0.75rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
   }
