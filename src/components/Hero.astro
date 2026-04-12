@@ -52,10 +52,10 @@ const {
     {subheadline && <p class="hero-subheadline">{subheadline}</p>}
     <div class="hero-actions">
       {ctaText && ctaLink && (
-        <a href={ctaLink} class="btn btn-primary">{ctaText}</a>
+        <a href={ctaLink} class="btn btn-primary"><span class="material-symbols-rounded" aria-hidden="true">chat_bubble</span>{ctaText}</a>
       )}
       {secondaryCtaText && secondaryCtaLink && (
-        <a href={secondaryCtaLink} class="btn btn-secondary">{secondaryCtaText}</a>
+        <a href={secondaryCtaLink} class="btn btn-secondary"><span class="material-symbols-rounded" aria-hidden="true">arrow_downward</span>{secondaryCtaText}</a>
       )}
     </div>
   </div>

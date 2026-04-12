@@ -37,7 +37,7 @@ const isImage = backgroundType === 'image';
     <h2 class="cta-headline">{headline}</h2>
     {subtext && <p class="cta-subtext">{subtext}</p>}
     <div class="cta-actions">
-      <a href={buttonLink} class="btn btn-light">{buttonText}</a>
+      <a href={buttonLink} class="btn btn-light"><span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>{buttonText}</a>
       {secondaryText && secondaryLink && (
         <a href={secondaryLink} class="cta-secondary">{secondaryText}</a>
       )}
