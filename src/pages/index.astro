@@ -10,8 +10,8 @@ import ContactForm from '../components/ContactForm.astro';
 ---
 
 <BaseLayout
-  title="HIVE — Ohio Home Improvement & Value Estimates"
-  description="Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio. Free consultations."
+  title="HIVE — Home Improvement + Value Estimates in Ohio"
+  description="Real estate, renovations, and homeowner guidance in Central Ohio. Free consultations."
   currentPage="/"
 >
 
@@ -27,7 +27,7 @@ import ContactForm from '../components/ContactForm.astro';
       "/images/photos/hero/exterior-front.jpg",
     ]}
     headline="Your home. Your plan.<br>Built right."
-    subheadline="Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio."
+    subheadline="Thoughtful design meets craftsmanship — real estate, renovations, and homeowner guidance in Central Ohio."
     ctaText="Let's Talk About Your Home"
     ctaLink="#contact"
     secondaryCtaText="See Our Work"
@@ -62,7 +62,7 @@ import ContactForm from '../components/ContactForm.astro';
       <div data-reveal="up" data-reveal-delay="2">
         <ServiceCard
           title="Renovations"
-          description="Hands-on construction from kitchens to whole-house transformations. PE-backed planning meets craftsmanship. Structural, not just cosmetic."
+          description="Hands-on construction from kitchens to whole-house transformations. PE-backed planning meets craftsmanship. Functional, not just cosmetic."
           href="#contact"
         >
           {/* Lucide: hammer (ISC) */}
@@ -77,7 +77,7 @@ import ContactForm from '../components/ContactForm.astro';
       <div data-reveal="up" data-reveal-delay="3">
         <ServiceCard
           title="DIY Coaching"
-          description="Guidance for homeowners who want to be involved. One-on-one consults, video walkthroughs, workshop setup. Do it right, whether you hire us or do it yourself."
+          description="Guidance and support for homeowners who want to be involved and empowered. Let's turn your goals into a plan and figure out how to work together."
           href="#contact"
         >
           {/* Lucide: lightbulb (ISC) */}
@@ -158,7 +158,7 @@ import ContactForm from '../components/ContactForm.astro';
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9L7.5 12.5L14 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Project Management Professional (PMP) — In Progress
+            M.S. Civil Engineering — Construction Management
           </li>
         </ul>
         <a href="#contact" class="btn btn-outline">Work With Us</a>
@@ -173,27 +173,30 @@ import ContactForm from '../components/ContactForm.astro';
     <div class="testimonials-intro" data-reveal="up">
       <h2>What Clients Say</h2>
     </div>
-    <div class="testimonials-grid">
-      <div data-reveal="up" data-reveal-delay="1">
+    <div class="testimonials-layout">
+      <div class="testimonial-featured" data-reveal="up">
         <TestimonialCard
-          quote="John didn't just help us find a house — he helped us understand what we were actually buying. The inspection walkthrough alone saved us thousands in unexpected repairs."
-          name="Sarah M."
-          context="Home buyer"
+          quote="I and members of my family had occupied the home since 1960. It was very dear to me and I shared my love and attachment of my childhood home with John. He immediately embraced my memories and took great care to keep me abreast of the upgrades and renovations while still maintaining the character of the property. John's creativity and expertise in the area of remodeling far surpasses anything that would be considered to be normal or just average. He would be an asset to any project."
+          name="Linda"
+          context="Eastgate — Home renovation"
+          featured={true}
         />
       </div>
-      <div data-reveal="up" data-reveal-delay="2">
-        <TestimonialCard
-          quote="We came in with a vision and a tight budget. John helped us figure out what was worth doing, what could wait, and what would actually add value. The kitchen turned out better than we imagined."
-          name="David & Rachel T."
-          context="Renovation clients"
-        />
-      </div>
-      <div data-reveal="up" data-reveal-delay="3">
-        <TestimonialCard
-          quote="I wanted to do the work myself but didn't know where to start. A two-hour session with John replaced weeks of YouTube research. He showed me the right approach and the right tools."
-          name="Marcus L."
-          context="DIY coaching client"
-        />
+      <div class="testimonials-pair">
+        <div data-reveal="up" data-reveal-delay="1">
+          <TestimonialCard
+            quote="John was an invaluable asset in helping us evaluate options and showing us exactly how we could keep our house in Columbus as a viable rental. He explained the costs and reasons for each part of work that could be done to prepare the house for renters and how it could help avoid issues and unnecessary maintenance costs once they moved in. The work was done exactly as he described it and our renters have been very happy in the space now for 3 years."
+            name="David & Jamie"
+            context="Franklin Park — Rental conversion"
+          />
+        </div>
+        <div data-reveal="up" data-reveal-delay="2">
+          <TestimonialCard
+            quote="After months of research and shopping prices, we hired HIVE to tear down the old deck and build a new one. They did a fantastic job. It was a pleasure to have John over at the house, chat about all of our options, and answer all of our questions. We were very happy with the process and the finished product. We highly recommend HIVE!"
+            name="Jeff & Beth"
+            context="Worthington — Deck build"
+          />
+        </div>
       </div>
     </div>
   </Section>
@@ -203,6 +206,12 @@ import ContactForm from '../components/ContactForm.astro';
       ========================================== */}
   <Section id="contact" padding="wide">
     <div data-reveal="up">
+      <div class="contact-options">
+        <a href="mailto:hello@HIVEohio.com" class="contact-email-option">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          hello@HIVEohio.com
+        </a>
+      </div>
       <ContactForm
         heading="Let's Talk About Your Home"
         subtext="Free consultations. No pressure. Tell us a little about what you're looking for."
@@ -219,8 +228,8 @@ import ContactForm from '../components/ContactForm.astro';
     subtext="Free estimates. Free consultations. Just a conversation about what's possible."
     buttonText="Schedule a Free Consultation"
     buttonLink="#contact"
-    secondaryText="Or email us at hello@hiveohio.com"
-    secondaryLink="mailto:hello@hiveohio.com"
+    secondaryText="Or email us at hello@HIVEohio.com"
+    secondaryLink="mailto:hello@HIVEohio.com"
     backgroundType="image"
     backgroundValue="/images/photos/favorites/46wt-backyard-south.jpg"
   />
@@ -285,7 +294,7 @@ import ContactForm from '../components/ContactForm.astro';
     display: grid;
     grid-template-rows: subgrid;
     grid-row: span 3;
-    padding: 1.5rem;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
   }
@@ -385,24 +394,56 @@ import ContactForm from '../components/ContactForm.astro';
     margin-bottom: 3rem;
   }
 
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  .testimonials-layout {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
   }
 
-  .testimonials-grid > div {
+  .testimonial-featured {
+    max-width: 900px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .testimonials-pair {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .testimonials-pair > div {
     display: flex;
   }
 
-  .testimonials-grid > div > :global(.testimonial-card) {
+  .testimonials-pair > div > :global(.testimonial-card) {
     flex: 1;
   }
 
   @media (max-width: 768px) {
-    .testimonials-grid {
+    .testimonials-pair {
       grid-template-columns: 1fr;
       gap: 1.25rem;
     }
+  }
+
+  /* Contact email option */
+  .contact-options {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-email-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-honey);
+    transition: opacity var(--transition-fast);
+  }
+
+  .contact-email-option:hover {
+    opacity: 0.8;
   }
 </style>

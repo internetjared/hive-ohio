@@ -58,6 +58,7 @@ html {
 body {
   font-family: var(--font-body);
   font-weight: 400;
+  font-size: 1.05rem;
   line-height: 1.6;
   color: var(--color-earth);
   background-color: var(--color-page);
@@ -174,12 +175,12 @@ p {
 }
 
 .btn-primary {
-  background-color: var(--color-olive);
+  background-color: var(--color-honey);
   color: var(--color-page);
 }
 
 .btn-primary:hover {
-  background-color: #6a7a4b;
+  background-color: #b5812f;
 }
 
 .btn-secondary {

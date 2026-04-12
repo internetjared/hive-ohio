@@ -3,12 +3,13 @@ interface Props {
   quote: string;
   name: string;
   context?: string;
+  featured?: boolean;
 }
 
-const { quote, name, context } = Astro.props;
+const { quote, name, context, featured = false } = Astro.props;
 ---
 
-<blockquote class="testimonial-card">
+<blockquote class:list={["testimonial-card", { "testimonial-card--featured": featured }]}>
   <svg class="testimonial-quote-mark" width="40" height="32" viewBox="0 0 40 32" fill="none" aria-hidden="true">
     <path d="M0 32V20C0 14.667 1.167 10.333 3.5 7C5.833 3.667 9.5 1.333 14.5 0L16.5 4C13.5 5 11.167 6.5 9.5 8.5C7.833 10.5 7 12.833 7 15.5H14V32H0ZM24 32V20C24 14.667 25.167 10.333 27.5 7C29.833 3.667 33.5 1.333 38.5 0L40.5 4C37.5 5 35.167 6.5 33.5 8.5C31.833 10.5 31 12.833 31 15.5H38V32H24Z" fill="currentColor"/>
   </svg>
@@ -58,5 +59,31 @@ const { quote, name, context } = Astro.props;
   .testimonial-context {
     font-size: 0.8rem;
     opacity: 0.6;
+  }
+
+  /* Featured variant */
+  .testimonial-card--featured {
+    padding: 3rem 2.5rem 2.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(60, 56, 47, 0.1);
+  }
+
+  .testimonial-card--featured .testimonial-quote-mark {
+    width: 48px;
+    height: 38px;
+    opacity: 0.3;
+  }
+
+  .testimonial-card--featured .testimonial-text {
+    font-size: 1.2rem;
+    line-height: 1.75;
+  }
+
+  .testimonial-card--featured .testimonial-name {
+    font-size: 1rem;
+  }
+
+  .testimonial-card--featured .testimonial-context {
+    font-size: 0.85rem;
   }
 </style>

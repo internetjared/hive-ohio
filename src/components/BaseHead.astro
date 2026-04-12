@@ -7,7 +7,7 @@ interface Props {
 
 const {
   title,
-  description = 'Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio.',
+  description = 'Real estate, renovations, and homeowner guidance in Central Ohio. Free consultations.',
   image = '/images/photos/favorites/2010mh-living-fireplace.jpg',
 } = Astro.props;
 
@@ -33,7 +33,7 @@ const absoluteImageURL = new URL(image, Astro.site);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={absoluteImageURL} />
-<meta property="og:site_name" content="HIVE — Ohio Home Improvement & Value Estimates" />
+<meta property="og:site_name" content="HIVE — Home Improvement + Value Estimates in Ohio" />
 <meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->

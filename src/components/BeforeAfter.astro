@@ -97,7 +97,7 @@ const {
   .ba-viewer {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
     overflow: hidden;
     cursor: col-resize;
@@ -349,12 +349,15 @@ const {
       setPos(pct);
     }
 
-    // Ease-out cubic for a natural slow-down
-    function easeOutCubic(t: number): number {
-      return 1 - Math.pow(1 - t, 3);
+    // Custom ease: starts quick, slows in the middle (anticipation), speeds up for the reveal
+    function easeCustomReveal(t: number): number {
+      // Combination: ease-in-out with a slower middle phase
+      if (t < 0.3) return t / 0.3 * 0.2; // quick start to 20%
+      if (t < 0.6) return 0.2 + ((t - 0.3) / 0.3) * 0.15; // slow crawl 20%→35%
+      return 0.35 + ((t - 0.6) / 0.4) * 0.65; // accelerate 35%→100%
     }
 
-    // Auto-reveal animation: 0% → 100% with ease-out (slows at end)
+    // Auto-reveal animation: 0% → 100% with custom curve
     function autoReveal() {
       isAnimating = true;
       const duration = 2200; // ms
@@ -363,7 +366,7 @@ const {
       function tick(now: number) {
         const elapsed = now - start;
         const t = Math.min(elapsed / duration, 1);
-        const eased = easeOutCubic(t);
+        const eased = easeCustomReveal(t);
         setPos(eased * 100);
 
         if (t < 1) {
@@ -389,17 +392,20 @@ const {
       isAnimating = false;
     }
 
-    // Intersection Observer — trigger reveal when visible
+    // Intersection Observer — re-trigger reveal when scrolling back into view
+    let hasBeenVisible = false;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !isDragging && !isAnimating) {
+            // Reset to 0% and replay the reveal
+            setPos(0);
             autoReveal();
-            observer.disconnect();
+            hasBeenVisible = true;
           }
         }
       },
-      { threshold: 0.7 }
+      { threshold: 0.5 }
     );
     observer.observe(viewer);
 

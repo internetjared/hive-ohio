@@ -25,13 +25,13 @@ const { title, description, image, currentPage } = Astro.props;
         {
           "@type": "LocalBusiness",
           "@id": "https://hiveohio.com/#business",
-          "name": "HIVE — Ohio Home Improvement & Value Estimates",
-          "alternateName": "HIVE Real Estate Group",
-          "description": "Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio. Licensed Professional Engineer and Realtor.",
+          "name": "HIVE — Home Improvement + Value Estimates in Ohio",
+          "alternateName": "HIVE Ohio",
+          "description": "Real estate, renovations, and homeowner guidance in Central Ohio. Licensed Professional Engineer and Realtor.",
           "url": "https://hiveohio.com",
           "logo": "https://hiveohio.com/images/logo/hive-logo-green.png",
           "image": "https://hiveohio.com/images/photos/favorites/2010mh-living-fireplace.jpg",
-          "email": "hello@hiveohio.com",
+          "email": "hello@HIVEohio.com",
           "areaServed": {
             "@type": "GeoCircle",
             "geoMidpoint": {
@@ -63,7 +63,7 @@ const { title, description, image, currentPage } = Astro.props;
                 "itemOffered": {
                   "@type": "Service",
                   "name": "Real Estate",
-                  "description": "Engineering-backed real estate guidance for buyers and sellers in Central Ohio."
+                  "description": "Real estate guidance for buyers and sellers in Central Ohio."
                 }
               },
               {
@@ -89,7 +89,7 @@ const { title, description, image, currentPage } = Astro.props;
           "@type": "WebSite",
           "@id": "https://hiveohio.com/#website",
           "url": "https://hiveohio.com",
-          "name": "HIVE — Ohio Home Improvement & Value Estimates",
+          "name": "HIVE — Home Improvement + Value Estimates in Ohio",
           "publisher": { "@id": "https://hiveohio.com/#business" }
         },
         {
@@ -97,7 +97,7 @@ const { title, description, image, currentPage } = Astro.props;
           "@id": "https://hiveohio.com/#webpage",
           "url": "https://hiveohio.com",
           "name": title,
-          "description": description || "Engineering-backed real estate, renovations, and homeowner guidance in Central Ohio.",
+          "description": description || "Real estate, renovations, and homeowner guidance in Central Ohio.",
           "isPartOf": { "@id": "https://hiveohio.com/#website" },
           "about": { "@id": "https://hiveohio.com/#business" }
         }
