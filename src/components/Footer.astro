@@ -46,8 +46,8 @@ const navLinks = [
   <div class="footer-compliance">
     <div class="container">
       <div class="compliance-badges">
-        <img src="/images/icons/equal-housing.svg" alt="Equal Housing Opportunity" width="40" height="44" class="compliance-badge" />
-        <span class="compliance-text">REALTOR&reg;</span>
+        <img src="/images/icons/nar-realtor.png" alt="REALTOR®" width="48" height="52" class="compliance-badge compliance-badge--nar" />
+        <img src="/images/icons/equal-housing.png" alt="Equal Housing Opportunity" width="44" height="44" class="compliance-badge compliance-badge--eho" />
         <img src="/images/icons/keller-williams.svg" alt="Keller Williams Realty" width="80" height="36" class="compliance-badge compliance-badge--kw" />
       </div>
     </div>
@@ -143,24 +143,22 @@ const navLinks = [
   }
 
   .compliance-badge {
-    width: 40px;
     height: auto;
-    opacity: 0.6;
-    filter: brightness(3);
+    opacity: 0.7;
+  }
+
+  .compliance-badge--nar {
+    width: 48px;
+  }
+
+  .compliance-badge--eho {
+    width: 44px;
+    filter: invert(1);
   }
 
   .compliance-badge--kw {
     width: 80px;
-    height: auto;
-    opacity: 0.6;
     filter: brightness(3);
-  }
-
-  .compliance-text {
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    opacity: 0.6;
   }
 
   .footer-bottom {
