@@ -49,13 +49,7 @@ import ContactForm from '../components/ContactForm.astro';
           description="Not just buying and selling — understanding what you're getting, what it will cost, and how it fits your plan. Engineering judgment meets real estate guidance."
           href="#contact"
         >
-          {/* Tabler: home-search (MIT) */}
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h4.7" />
-            <path d="M9 21v-6a2 2 0 0 1 2 -2h2" />
-            <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-            <path d="M20.2 20.2l1.8 1.8" />
-          </svg>
+          <img slot="icon" src="/images/icons/icon-home.png" alt="" width="56" height="56" class="service-icon-img" />
         </ServiceCard>
       </div>
 
@@ -65,12 +59,7 @@ import ContactForm from '../components/ContactForm.astro';
           description="Hands-on construction from kitchens to whole-house transformations. PE-backed planning meets craftsmanship. Functional, not just cosmetic."
           href="#contact"
         >
-          {/* Lucide: hammer (ISC) */}
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9" />
-            <path d="m18 15 4-4" />
-            <path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" />
-          </svg>
+          <img slot="icon" src="/images/icons/icon-hammer.png" alt="" width="56" height="56" class="service-icon-img" />
         </ServiceCard>
       </div>
 
@@ -80,12 +69,7 @@ import ContactForm from '../components/ContactForm.astro';
           description="Guidance and support for homeowners who want to be involved and empowered. Let's turn your goals into a plan and figure out how to work together."
           href="#contact"
         >
-          {/* Lucide: lightbulb (ISC) */}
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-            <path d="M9 18h6" />
-            <path d="M10 22h4" />
-          </svg>
+          <img slot="icon" src="/images/icons/icon-lightbulb.png" alt="" width="56" height="56" class="service-icon-img" />
         </ServiceCard>
       </div>
     </div>
@@ -137,7 +121,7 @@ import ContactForm from '../components/ContactForm.astro';
   <Section id="about-teaser">
     <div class="about-grid">
       <div class="about-image" data-reveal="left">
-        <img src="/images/logo/hive-logo-green.png" alt="HIVE logo" width="280" height="280" class="about-logo-placeholder" />
+        <img src="/images/logo/hive-lockup-earth.png" alt="HIVE — Home Improvements + Value Estimates" width="360" height="360" class="about-logo-placeholder" />
       </div>
       <div class="about-content" data-reveal="right">
         <h2>Built Different</h2>
@@ -264,6 +248,12 @@ import ContactForm from '../components/ContactForm.astro';
     flex: 1;
   }
 
+  :global(.service-icon-img) {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
   @media (max-width: 768px) {
     .services-grid {
       grid-template-columns: 1fr;
@@ -286,14 +276,13 @@ import ContactForm from '../components/ContactForm.astro';
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem 2rem;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 900px;
+    margin-inline: auto;
   }
 
   .projects-grid > :global(.before-after) {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -321,10 +310,10 @@ import ContactForm from '../components/ContactForm.astro';
   }
 
   .about-logo-placeholder {
-    width: 280px;
-    height: 280px;
+    width: 320px;
+    height: auto;
     object-fit: contain;
-    opacity: 0.6;
+    opacity: 0.85;
   }
 
   .about-content h2 {
@@ -375,8 +364,8 @@ import ContactForm from '../components/ContactForm.astro';
     }
 
     .about-logo-placeholder {
-      width: 180px;
-      height: 180px;
+      width: 220px;
+      height: auto;
     }
 
     .credentials-list {
