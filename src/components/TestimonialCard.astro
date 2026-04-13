@@ -75,8 +75,17 @@ const { quote, name, context, featured = false } = Astro.props;
   }
 
   .testimonial-card--featured .testimonial-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.75;
+    columns: 2;
+    column-gap: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-card--featured .testimonial-text {
+      columns: 1;
+      font-size: 1.05rem;
+    }
   }
 
   .testimonial-card--featured .testimonial-name {
